@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore")
 
 # Задаем значения по умолчанию для DAG
 default_args = {
-    'owner': 'mi_sozonov',  # Указываем владельца DAG
+    'owner': 'FGJ',  # Указываем владельца DAG
     'depends_on_past': False,  # Указываем, зависит ли DAG от предыдущих запусков
     'retries': 2,  # Указываем количество попыток в случае ошибки
     'retry_delay': timedelta(minutes=5),  # Указываем задержку между попытками
@@ -18,13 +18,13 @@ default_args = {
 
 # Вычисляем год для анализа данных
 # Используем хэш для получения уникального года
-my_date = 1994 + hash(f'mi-sozonov') % 23
+my_date = 1994 + hash(f'FGJ') % 23
 
 # Определяем DAG
 
 
-@dag(default_args=default_args, schedule_interval='0 15 * * *', catchup=False, tags=['mi_sozonov'])
-def gaming_sales_mi_sozonov():
+@dag(default_args=default_args, schedule_interval='0 15 * * *', catchup=False, tags=['FGJ'])
+def gaming_sales():
     # Определяем задачу для загрузки данных
     # Указываем количество попыток и задержку для задачи
     @task(retries=4, retry_delay=timedelta(10))
@@ -137,4 +137,4 @@ def gaming_sales_mi_sozonov():
 
 
 # Запускаем DAG
-gaming_sales_mi_sozonov = gaming_sales_mi_sozonov()
+gaming_sales = gaming_sales()
